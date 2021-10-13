@@ -158,7 +158,7 @@ function crearCliente() {
     _comuna.innerHTML = comuna.options[comuna.value].text;
     //habilidad
     var _habilidades = document.createElement("li");
-    _habilidades.className += "text-center col-3";
+    _habilidades.className += "text-center col-3 ul_lista_habilidades";
     var _hab_ul = document.createElement("ul");
     _hab_ul.className += "row list-unstyled";
     var cantidadHabilidades = lista_clientes_OBJ[lista_clientes_OBJ.length - 1].a_habilidasdes.length;
