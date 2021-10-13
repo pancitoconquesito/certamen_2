@@ -38,4 +38,11 @@
   #lista_habilidades li p {
     padding: 1px 6px 1px 6px; }
 
+.ul_lista_habilidades li {
+  border: solid black 2px;
+  padding: 2px;
+  margin: 3px; }
+  .ul_lista_habilidades li p {
+    padding: 1px 6px 1px 6px; }
+
 /*# sourceMappingURL=estilos.css.map */
