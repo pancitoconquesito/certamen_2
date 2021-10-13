@@ -1,44 +1,36 @@
 let btn_crear:any=document.getElementById("btn_crear");
 btn_crear.addEventListener("click", function(event:any){
-    // validaciones
-    // if ok agregado 
-    
     if(validaciones()==true){
         console.log("OK");
         guardarCliente();
         crearCliente();
-        // reset
+        refreshComuna();
+        alert("Cliente agregado exitosamente");
         event.preventDefault();
         event.stopPropagation();
     }else{
-        // btn_crear.type="submit";
-        console.log("NO OK");
+        alert("Complete todos los campos");
     }
-    
 });
 
-    let nombre:any=document.getElementById("nombre");
-    let edad:any=document.getElementById("edad");
-    let g_hombre:any=document.getElementById("g_hombre");
-    let g_mujer:any=document.getElementById("g_mujer");
-    let fecha_nacimiento:any=document.getElementById("fecha_nacimiento");
-    // let region:any=document.getElementById("region");
-    // let comuna:any=document.getElementById("comuna");
-    let direccion:any=document.getElementById("direccion");
-    let telefono:any=document.getElementById("telefono");
-    let observaciones:any=document.getElementById("observaciones");
+let nombre:any=document.getElementById("nombre");
+let edad:any=document.getElementById("edad");
+let g_hombre:any=document.getElementById("g_hombre");
+let g_mujer:any=document.getElementById("g_mujer");
+let fecha_nacimiento:any=document.getElementById("fecha_nacimiento");
+let direccion:any=document.getElementById("direccion");
+let telefono:any=document.getElementById("telefono");
+let observaciones:any=document.getElementById("observaciones");
 function validaciones():boolean{
     let countOK:number=0;
-    if(nombre.value.length>0)countOK++;//ok
-    if(edad.value.length>0)countOK++;//debe ser numero//ok
+    if(nombre.value.length>0)countOK++;
+    if(edad.value.length>0)countOK++;//debe ser numero
     if(g_hombre.checked || g_mujer.checked)countOK++;
     if(fecha_nacimiento.value.length>0)countOK++;
     if(region.value!=0 && comuna.value!=0)countOK++;
-    if(direccion.value.length>0)countOK++;//ok
-    if(telefono.value.length>0)countOK++;//debe ser numero//ok
-    if(observaciones.value.length>20)countOK++;//ok
-
-    console.log(countOK);
+    if(direccion.value.length>0)countOK++;
+    if(telefono.value.length>0)countOK++;//debe ser numero
+    if(observaciones.value.length>20)countOK++;
     
     if(countOK==8)  return true;
     else return false;
@@ -159,7 +151,8 @@ let indice_registro:number=0;
 function crearCliente():void{
     let _div:any=document.createElement("div");
     _div.className += "col-12 py-2";
-    _div.className += indice_registro+'a';
+    _div.className += "ELIM";
+    _div.className += indice_registro;
     let _ul:any=document.createElement("ul");
     _ul.className += "row list-unstyled";
     // genero
@@ -203,11 +196,14 @@ function crearCliente():void{
     let _eliminar:any=document.createElement("li");
     _eliminar.className += "text-center col-1";
     let _elim_btn:any=document.createElement("button");
-    _elim_btn.id=indice_registro+'a';
+    _elim_btn.id=indice_registro;
     _elim_btn.addEventListener("click", function(event:any){
         //bsucar elemento
-        let elemDelete:any=document.getElementById(event.target.id+'a');
+        let elemDelete:any=document.getElementsByClassName(event.target.id);
+        console.log(elemDelete[0]);
+        lista_clientes.removeChild(elemDelete[0]);
         //eliminar
+
     });
     let _elim_span:any=document.createElement("span");
     _elim_span.className += "material-icons-outlined";
@@ -223,7 +219,7 @@ function crearCliente():void{
     _ul.appendChild(_habilidades);
     _ul.appendChild(_eliminar);
     _div.appendChild(_ul);
-
+    indice_registro++;
     lista_clientes.appendChild(_div);
 }
 

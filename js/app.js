@@ -1,19 +1,17 @@
 "use strict";
 var btn_crear = document.getElementById("btn_crear");
 btn_crear.addEventListener("click", function (event) {
-    // validaciones
-    // if ok agregado 
     if (validaciones() == true) {
         console.log("OK");
         guardarCliente();
         crearCliente();
-        // reset
+        refreshComuna();
+        alert("Cliente agregado exitosamente");
         event.preventDefault();
         event.stopPropagation();
     }
     else {
-        // btn_crear.type="submit";
-        console.log("NO OK");
+        alert("Complete todos los campos");
     }
 });
 var nombre = document.getElementById("nombre");
@@ -21,17 +19,15 @@ var edad = document.getElementById("edad");
 var g_hombre = document.getElementById("g_hombre");
 var g_mujer = document.getElementById("g_mujer");
 var fecha_nacimiento = document.getElementById("fecha_nacimiento");
-// let region:any=document.getElementById("region");
-// let comuna:any=document.getElementById("comuna");
 var direccion = document.getElementById("direccion");
 var telefono = document.getElementById("telefono");
 var observaciones = document.getElementById("observaciones");
 function validaciones() {
     var countOK = 0;
     if (nombre.value.length > 0)
-        countOK++; //ok
+        countOK++;
     if (edad.value.length > 0)
-        countOK++; //debe ser numero//ok
+        countOK++; //debe ser numero
     if (g_hombre.checked || g_mujer.checked)
         countOK++;
     if (fecha_nacimiento.value.length > 0)
@@ -39,12 +35,11 @@ function validaciones() {
     if (region.value != 0 && comuna.value != 0)
         countOK++;
     if (direccion.value.length > 0)
-        countOK++; //ok
+        countOK++;
     if (telefono.value.length > 0)
-        countOK++; //debe ser numero//ok
+        countOK++; //debe ser numero
     if (observaciones.value.length > 20)
-        countOK++; //ok
-    console.log(countOK);
+        countOK++;
     if (countOK == 8)
         return true;
     else
@@ -131,7 +126,8 @@ var indice_registro = 0;
 function crearCliente() {
     var _div = document.createElement("div");
     _div.className += "col-12 py-2";
-    _div.className += indice_registro + 'a';
+    _div.className += "ELIM";
+    _div.className += indice_registro;
     var _ul = document.createElement("ul");
     _ul.className += "row list-unstyled";
     // genero
@@ -177,10 +173,12 @@ function crearCliente() {
     var _eliminar = document.createElement("li");
     _eliminar.className += "text-center col-1";
     var _elim_btn = document.createElement("button");
-    _elim_btn.id = indice_registro + 'a';
+    _elim_btn.id = indice_registro;
     _elim_btn.addEventListener("click", function (event) {
         //bsucar elemento
-        var elemDelete = document.getElementById(event.target.id + 'a');
+        var elemDelete = document.getElementsByClassName(event.target.id);
+        console.log(elemDelete[0]);
+        lista_clientes.removeChild(elemDelete[0]);
         //eliminar
     });
     var _elim_span = document.createElement("span");
@@ -196,5 +194,6 @@ function crearCliente() {
     _ul.appendChild(_habilidades);
     _ul.appendChild(_eliminar);
     _div.appendChild(_ul);
+    indice_registro++;
     lista_clientes.appendChild(_div);
 }
