@@ -199,9 +199,9 @@ function crearCliente():void{
     _elim_btn.id=indice_registro;
     _elim_btn.addEventListener("click", function(event:any){
         //bsucar elemento
-        let elemDelete:any=document.getElementsByClassName(event.target.id);
-        console.log(elemDelete[0]);
-        lista_clientes.removeChild(elemDelete[0]);
+        //let elemDelete:any=document.getElementsByClassName(event.target.id);
+        //console.log(elemDelete[0]);
+        //lista_clientes.removeChild(elemDelete[0]);
         //eliminar
 
     });
